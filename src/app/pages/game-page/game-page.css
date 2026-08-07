@@ -2,7 +2,9 @@
   display: block;
   min-height: 100vh;
   background: #f6f7f9;
-  color: #222;
+  color: #666;
+  font-size: 14px;
+  line-height: 1.55;
 }
 
 .game-layout {
@@ -14,6 +16,20 @@
   margin: 0 auto;
   padding: 18px;
   box-sizing: border-box;
+}
+
+@media (max-width: 850px) {
+  .game-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .side-panel {
+    min-height: auto;
+  }
+
+  .game-panel {
+    min-width: 0;
+  }
 }
 
 .side-panel,
@@ -51,7 +67,7 @@
   color: #666;
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  margin-bottom: 2px;
+  margin-top: 20px;
   font-size: 12px;
 }
 
@@ -63,7 +79,17 @@ button {
   cursor: pointer;
 }
 
-button:hover:not(:disabled) {
+button.selected {
+  border-color: #2e7d32;
+  background: #eef8ee;
+  color: #256429;
+}
+
+button.selected:hover {
+  background: #e2f2e2;
+}
+
+button:hover {
   background: #f0f0f0;
 }
 
@@ -76,7 +102,17 @@ button:hover:not(:disabled) {
   margin-top: 10px;
 }
 
-.game-score {
+.score-box {
+  padding: 8px;
+  border-radius: 10px;
+  background: #f2f2f2;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.score-box strong {
+  font-size: 20px;
 }
 
 .board-placeholder {
@@ -86,14 +122,14 @@ button:hover:not(:disabled) {
   width: min(72%, 620px);
   aspect-ratio: 1;
 
-  background: #fafafa;
+  background: #fcfcfc;
   border: 1px dashed #d8d8d8;
   border-radius: 14px;
   box-sizing: border-box;
 
-  color: #999;
+  color: #9a9a9a;
   font-size: 20px;
-  line-height: 1.6;
+  line-height: 1.5;
   text-align: center;
 }
 
@@ -109,6 +145,7 @@ button:hover:not(:disabled) {
   width: 75px;
   height: 75px;
   border: 1px solid #e0e0e0;
+  background: #f6f7f9;
 }
 
 /* Dialog */
@@ -131,11 +168,20 @@ button:hover:not(:disabled) {
   padding: 28px;
 }
 
-.dialog-content h2,
+.dialog-content h1,
 .dialog-content p {
   margin: 0;
+  color: #666;
 }
 
 .dialog-content button {
   align-self: flex-end;
+  min-width: 100px;
+  border-color: #2e7d32;
+  background: #eef8ee;
+  color: #256429;
+}
+
+.dialog-content button:hover {
+  background: #e2f2e2;
 }

@@ -6,15 +6,17 @@
 
     <div class="game-options-section">
 
-      <div class="section-title">Score</div>
-
-      <div class="game-score">{{ score }}</div>
+      <div class="score-box">
+        <span>Score</span>
+        <strong>{{ score }}</strong>
+      </div>
 
       <div class="section-title">Start new game</div>
 
       @for (size of boardSizes; track size) {
       <button class="new-game-button"
         type="button"
+        [class.selected]="selectedSize === size"
         (click)="startNewGame(size)"
       >
         {{ boardSizeLabels[size] }}
@@ -65,7 +67,7 @@
 <dialog #dialog class="game-dialog">
   <div class="dialog-content">
     @if (dialogData) {
-      <h2>{{ dialogData.title }}</h2>
+      <h1>{{ dialogData.title }}</h1>
 
       @for (paragraph of dialogData.paragraphs; track paragraph) {
         <p>{{ paragraph }}</p>
