@@ -62,32 +62,18 @@
 
 </div>
 
-<dialog #gameOverDialog class="game-dialog">
+<dialog #dialog class="game-dialog">
   <div class="dialog-content">
-    <h2>Game Over!</h2>
+    @if (dialogData) {
+      <h2>{{ dialogData.title }}</h2>
 
-    <p>Your score: {{ score }}</p>
+      @for (paragraph of dialogData.paragraphs; track paragraph) {
+        <p>{{ paragraph }}</p>
+      }
 
-    <button type="button" (click)="closeGameOverDialog()">
-      OK
-    </button>
-  </div>
-</dialog>
-
-<dialog #aboutDialog class="game-dialog">
-  <div class="dialog-content">
-    <h2>Memory</h2>
-
-    <p>
-      Memory is a classic game in which you uncover pairs of tiles. Each tile has an identical counterpart.
-      Try to find matching pairs by memorizing tiles positions. Uncovering two matching tiles removes them from the board.
-    </p><p>
-      Your score is based on the number of unsuccessful attempts. The lower it is, the better.
-      The goal is to clear the board with as few mistakes as possible.
-    </p>
-
-    <button type="button" (click)="closeAboutDialog()">
-      Close
-    </button>
+      <button type="button" (click)="closeDialog()">
+        OK
+      </button>
+    }
   </div>
 </dialog>

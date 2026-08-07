@@ -1,5 +1,6 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { BoardSize, BOARD_DIMENSIONS } from '../../models/board-size';
+import { DialogData, DialogType, DIALOG_CONFIGS } from '../../models/dialog-data';
 import { Tile } from '../../models/tile';
 import { TileStatus } from '../../models/tile-status';
 
@@ -11,11 +12,8 @@ import { TileStatus } from '../../models/tile-status';
 })
 export class GamePage implements OnInit {
 
-  @ViewChild('gameOverDialog')
-  private gameOverDialog!: ElementRef<HTMLDialogElement>;
-
-  @ViewChild('aboutDialog')
-  private aboutDialog!: ElementRef<HTMLDialogElement>;
+  @ViewChild('dialog')
+  private dialog!: ElementRef<HTMLDialogElement>;
 
   readonly boardSizes = Object.values(BoardSize);
   readonly boardSizeLabels: Record<BoardSize, string> = {
@@ -30,6 +28,7 @@ export class GamePage implements OnInit {
   selectedSize: BoardSize | null = null;
   tileMatrix: Tile[][] = [];
   score = 0;
+  dialogData!: DialogData;
 
   private uncoveredList: Tile[] = [];
   private removed = 0;
@@ -135,14 +134,6 @@ export class GamePage implements OnInit {
     }
   }
 
-  private openGameOverDialog(): void {
-    this.gameOverDialog.nativeElement.showModal();
-  }
-
-  closeGameOverDialog(): void {
-    this.gameOverDialog.nativeElement.close();
-  }
-
   private resetGame(): void {
     if (this.pairTimeout) {
       clearTimeout(this.pairTimeout);
@@ -169,14 +160,30 @@ export class GamePage implements OnInit {
     this.imageCache.push(backImage);
   }
 
-  // About dialog
+  // Dialogs
 
   openAboutDialog(): void {
-    this.aboutDialog.nativeElement.showModal();
+    this.openDialog(DialogType.ABOUT);
   }
 
-  closeAboutDialog(): void {
-    this.aboutDialog.nativeElement.close();
+  openGameOverDialog(): void {
+    this.openDialog(DialogType.GAME_OVER);
+  }
+
+  closeDialog(): void {
+    this.dialog.nativeElement.close();
+  }
+
+  private openDialog(type: DialogType): void {
+    this.dialogData = DIALOG_CONFIGS[type];
+
+    if (type === DialogType.GAME_OVER) {
+      this.dialogData.paragraphs = [
+        `Your score: ${this.score}`
+      ];
+    }
+
+    this.dialog.nativeElement.showModal();
   }
 
 }
