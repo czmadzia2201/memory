@@ -1,0 +1,92 @@
+<div class="game-layout">
+
+  <aside class="side-panel">
+
+    <h1>Memory</h1>
+
+    <div class="game-options-section">
+
+      <div class="section-title">Score</div>
+
+      <div class="game-score">{{ score }}</div>
+
+      <div class="section-title">Start new game</div>
+
+      @for (size of boardSizes; track size) {
+      <button class="new-game-button"
+        type="button"
+        (click)="startNewGame(size)"
+      >
+        {{ boardSizeLabels[size] }}
+      </button>
+      }
+
+      <button class="about-button" type="button" (click)="openAboutDialog()">
+        <i class="bi bi-info-circle"></i> About the Game
+      </button>
+
+    </div>
+
+  </aside>
+
+  <main class="game-panel">
+
+    @if (selectedSize) {
+      <div
+        class="board-container"
+        [style.--board-width]="BOARD_DIMENSIONS[selectedSize].cols"
+        [style.--board-height]="BOARD_DIMENSIONS[selectedSize].rows"
+      >
+        @for (row of tileMatrix; track $index) {
+          @for (cell of row; track cell) {
+            <div class="board-cell" (click)="handleTileClick(cell)">
+              @if (cell.status === TileStatus.UNCOVERED) {
+                <img [src]="cell.image" alt="">
+              } @else if (cell.status === TileStatus.COVERED) {
+                <img [src]="'/images/back.png'" alt="">
+              }
+            </div>
+          }
+        }
+      </div>
+    } @else {
+      <div class="board-placeholder">
+        <span>
+          Choose board size<br>
+          and start a new game.
+        </span>
+      </div>
+    }
+
+  </main>
+
+</div>
+
+<dialog #gameOverDialog class="game-dialog">
+  <div class="dialog-content">
+    <h2>Game Over!</h2>
+
+    <p>Your score: {{ score }}</p>
+
+    <button type="button" (click)="closeGameOverDialog()">
+      OK
+    </button>
+  </div>
+</dialog>
+
+<dialog #aboutDialog class="game-dialog">
+  <div class="dialog-content">
+    <h2>Memory</h2>
+
+    <p>
+      Memory is a classic game in which you uncover pairs of tiles and try to find matching pairs by memorizing their positions.
+      Each tile has an identical counterpart. Finding a matching pair removes both tiles from the board.
+      Your score is based on the number of unsuccessful attempts. The lower it is, the better.
+      The goal is to clear the board with as few mistakes as possible.
+    </p>
+
+    <button type="button" (click)="closeAboutDialog()">
+      Close
+    </button>
+  </div>
+</dialog>

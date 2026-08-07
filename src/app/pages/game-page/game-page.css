@@ -1,0 +1,141 @@
+:host {
+  display: block;
+  min-height: 100vh;
+  background: #f6f7f9;
+  color: #222;
+}
+
+.game-layout {
+  display: grid;
+  grid-template-columns: 250px minmax(0, 1fr);
+  gap: 20px;
+  max-width: 1300px;
+  min-height: 100vh;
+  margin: 0 auto;
+  padding: 18px;
+  box-sizing: border-box;
+}
+
+.side-panel,
+.game-panel {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 14px;
+  box-sizing: border-box;
+}
+
+.side-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  padding: 18px;
+}
+
+.game-panel {
+  display: grid;
+  place-items: center;
+  min-height: 0;
+  padding: 14px;
+  min-width: 640px;
+}
+
+.game-options-section {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  height:95%;
+}
+
+.section-title {
+  font-weight: 600;
+  color: #666;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 2px;
+  font-size: 12px;
+}
+
+button {
+  padding: 8px 12px;
+  border: 1px solid #bbb;
+  border-radius: 8px;
+  background: #fff;
+  cursor: pointer;
+}
+
+button:hover:not(:disabled) {
+  background: #f0f0f0;
+}
+
+.about-button {
+  margin-top: auto;
+  margin-bottom: 20px;
+}
+
+.new-game-button {
+  margin-top: 10px;
+}
+
+.game-score {
+}
+
+.board-placeholder {
+  display: grid;
+  place-items: center;
+
+  width: min(72%, 620px);
+  aspect-ratio: 1;
+
+  background: #fafafa;
+  border: 1px dashed #d8d8d8;
+  border-radius: 14px;
+  box-sizing: border-box;
+
+  color: #999;
+  font-size: 20px;
+  line-height: 1.6;
+  text-align: center;
+}
+
+.board-container {
+  display: grid;
+  width: max-content;
+  grid-template-columns: repeat(var(--board-width), auto);
+  grid-template-rows: repeat(var(--board-height), auto);
+  gap: 0;
+}
+
+.board-cell {
+  width: 75px;
+  height: 75px;
+  border: 1px solid #e0e0e0;
+}
+
+/* Dialog */
+.game-dialog {
+  width: min(90vw, 420px);
+  padding: 0;
+  border: none;
+  border-radius: 14px;
+  box-shadow: 0 18px 50px rgb(0 0 0 / 25%);
+}
+
+.game-dialog::backdrop {
+  background: rgb(0 0 0 / 40%);
+}
+
+.dialog-content {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 28px;
+}
+
+.dialog-content h2,
+.dialog-content p {
+  margin: 0;
+}
+
+.dialog-content button {
+  align-self: flex-end;
+}
