@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<script language="JavaScript" type="text/javascript">
+
+const imagePath = "../public/images/";
+
+const tileStatus = {
+    COVERED: "covered",
+    UNCOVERED: "uncovered",
+    REMOVED: "removed",
+}
+
+var uncovered = 0;
+var removed = 0;
+var score = 0;
+
+var colCount = 6;
+var rowCount = 5;
+
+class Tile {
+    constructor(id, image) {
+        this.id = id;
+        this.image = image;
+        this.status = tileStatus.COVERED;
+    }
+
+    setStatus(status) {
+        this.status = status;
+    }
+}
+
+// INIT GAME
+
+function buildItems(count) {
+    var items = [];
+    var item = 1;
+    for (var i = 0; i < count; i++) {
+        items[i] = item;
+        if (i%2==1) 
+	    item++;
+    }
+    return items;
+}
+
+function shuffle(count) {
+    var items = buildItems(count);
+    for (var i = items.length - 1; i > 0; i--) {  
+        var j = Math.floor(Math.random() * (i + 1));
+        var temp = items[i];
+        items[i] = items[j];
+        items[j] = temp;
+    }
+    return items;
+}
+
+function createTileList() {
+    var items = shuffle(colCount*rowCount);
+    var tileList = [];
+    for(var i = 0; i < items.length; i++) {
+        tileList[i] = new Tile(i, imagePath + items[i] + ".png");    
+    }
+    return tileList;
+}
+
+function generateGrid() {
+    document.getElementById("grid-container").innerHTML = "";
+    var tileList = createTileList();
+    for(var i = 0; i < tileList.length; i++) {
+        var gridItem = document.createElement("div");
+        gridItem.setAttribute("id", i); 
+        gridItem.setAttribute("class", "grid-item");
+	gridItem.innerHTML = "<img src=" + imagePath + "back.png>";
+        gridItem.onclick = function() { uncoverAndCheck(this.id, tileList) };
+        document.getElementById("grid-container").appendChild(gridItem);
+    }
+}
+
+function showScore() {
+    document.getElementById("score").innerHTML = score;
+}
+
+function setSize(size) {
+    var containerClass;
+    switch(size) {
+        case "small":
+            colCount = 6;
+            rowCount = 5;
+            containerClass = "small";
+            break; 
+        case "medium":
+            colCount = 7;
+            rowCount = 6;
+            containerClass = "medium";
+            break; 
+        case "big":
+            colCount = 8;
+            rowCount = 7;
+            containerClass = "big";
+            break; 
+    } 
+    document.getElementById("grid-container").className = containerClass;
+    startNewGame();	
+} 
+
+// PLAY
+
+function uncoverAndCheck(id, tileList) {
+    var tile = tileList[id];
+    if (tile.status == tileStatus.COVERED && uncovered < 2) {
+	uncoverTile(tile); 
+        if (uncovered == 2) {
+            setTimeout(function(){ checkSolution(tileList); },1500);    
+        }        
+    }
+}
+
+function uncoverTile(tile) {
+    tile.status = tileStatus.UNCOVERED;
+    document.getElementById(tile.id).innerHTML = "<img src=" + tile.image + ">"
+    uncovered++;
+}
+
+function coverTile(tile) {
+    tile.status = tileStatus.COVERED;
+    document.getElementById(tile.id).innerHTML = "<img src=" + imagePath + "back.png>"
+    uncovered--;
+}
+
+function removeTile(tile) {
+    tile.status = tileStatus.REMOVED;
+    document.getElementById(tile.id).innerHTML = ""
+    removed++;
+    uncovered--;
+}
+
+function checkEndGame(size, tileList) {
+    if (removed == size) {
+        alert("Game over!\nYour score: " + score);
+        for(var i = 0; i < tileList.length; i++) {
+            uncoverTile(tileList[i]);
+        }
+    }
+}
+
+function checkSolution(tileList) {
+    var tile1 = null;
+    var tile2 = null;
+    for(var i = 0; i < tileList.length; i++) {
+        if (tileList[i].status == tileStatus.UNCOVERED) {
+            if (tile1 == null) {
+                tile1 = tileList[i];
+                continue;
+            }
+            tile2 = tileList[i];
+            break;
+        }
+    }
+    if (tile1.image == tile2.image) {
+        removeTile(tile1);
+        removeTile(tile2);
+        checkEndGame(colCount*rowCount, tileList);
+    } else {
+        coverTile(tile1);
+        coverTile(tile2);
+        score++;
+        showScore();
+    }
+}
+
+function init() {
+    generateGrid();
+    showScore();
+}
+
+function startNewGame() {
+    uncovered = 0;
+    removed = 0;
+    score = 0;
+    init();
+}
+
+</script>
+
+<style>
+button {
+    width: 130px;
+    margin-top:10px;
+    margin-bottom: 10px;
+}
+#grid-container {
+    display: grid;
+    background-color: #58ac84;
+    padding: 5px;
+}
+.small {
+    grid-template-columns: repeat(6, 1fr);
+    width: 600px;
+}
+.medium {
+    grid-template-columns: repeat(7, 1fr);
+    width: 700px;
+}
+.big {
+    grid-template-columns: repeat(8, 1fr);
+    width: 800px;
+}
+.grid-item {
+    width: 98px;
+    height: 98px;
+    background-color: white;
+    border: 1px solid;
+}
+
+</style>
+
+</head>
+
+<body onload="init()">
+
+<div style="width:1100px; height:925px; padding-top:10px; margin:auto">
+    <h3 align="center">Memory</h3>
+    <div style="width:200px; height:50%; padding-left:50px; float:left">
+        <h4>Score</h4>
+        <div id="score"></div>
+        <button style="margin-top:30px; margin-bottom:30px" type="button" onclick="startNewGame()">new game</button>
+
+        <h4>Choose board size</h4>
+        <button type="button" onclick="setSize('small')">small (6 x 5)</button>
+        <button type="button" onclick="setSize('medium')">medium (7 x 6)</button>
+        <button type="button" onclick="setSize('big')">big (8 x 7)</button>
+    </div>
+    <div id="grid-container" class="small"></div>
+</div>
+
+</body>
+</html>
