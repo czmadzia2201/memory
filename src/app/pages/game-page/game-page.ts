@@ -29,6 +29,7 @@ export class GamePage implements OnInit {
   tileMatrix: Tile[][] = [];
   score = 0;
   dialogData!: DialogData;
+  gameOver = false;
 
   private uncoveredList: Tile[] = [];
   private removed = 0;
@@ -126,6 +127,7 @@ export class GamePage implements OnInit {
     const tileCount = BOARD_DIMENSIONS[this.selectedSize!].rows * BOARD_DIMENSIONS[this.selectedSize!].cols;
     if (this.removed === tileCount) {
       this.openGameOverDialog();
+      this.gameOver = true;
       for (const row of this.tileMatrix) {
         for (const tile of row) {
           this.uncoverTile(tile);
@@ -144,6 +146,7 @@ export class GamePage implements OnInit {
     this.score = 0;
     this.uncoveredList = [];
     this.removed = 0;
+    this.gameOver = false;
   }
 
   private preloadImages(): void {

@@ -18,29 +18,6 @@
   box-sizing: border-box;
 }
 
-@media (max-width: 850px) {
-  .game-layout {
-    grid-template-columns: 1fr;
-    min-width: 360px;
-  }
-
-  .game-panel {
-    min-width: 0;
-  }
-
-  .side-panel {
-    min-height: auto;
-  }
-
-  .board-container {
-    --tile-size: clamp(
-      36px,
-      calc((100vw - 80px) / var(--board-width)),
-      96px
-    );
-  }
-}
-
 .side-panel,
 .game-panel {
   background: #fff;
@@ -145,7 +122,10 @@ button:hover {
 .board-container {
   --tile-size: clamp(
     36px,
-    calc((100vw - 380px) / var(--board-width)),
+    min(
+      calc((100vw - 80px) / var(--board-width)),
+      calc((100vh - 70px) / var(--board-height))
+    ),
     96px
   );
 
@@ -168,6 +148,10 @@ button:hover {
   width: 100%;
   height: 100%;
   object-fit: contain;
+}
+
+.board-cell.clickable {
+  cursor: pointer;
 }
 
 /* Dialog */
@@ -207,3 +191,32 @@ button:hover {
 .dialog-content button:hover {
   background: #e2f2e2;
 }
+
+/* Mobile */
+@media (max-width: 850px) {
+  .game-layout {
+    grid-template-columns: 1fr;
+    min-width: 360px;
+  }
+
+  .game-panel {
+    min-width: 0;
+  }
+
+  .side-panel {
+    min-height: auto;
+  }
+
+  .board-container {
+    --tile-size: clamp(
+      36px,
+      min(
+        calc((100vw - 380px) / var(--board-width)),
+        calc((100vh - 70px) / var(--board-height))
+      ),
+      96px
+    );
+  }
+}
+
+

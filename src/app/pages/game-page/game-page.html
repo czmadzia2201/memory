@@ -42,7 +42,11 @@
       >
         @for (row of tileMatrix; track $index) {
           @for (cell of row; track cell) {
-            <div class="board-cell" (click)="handleTileClick(cell)">
+            <div
+              class="board-cell"
+              [class.clickable]="cell.status !== TileStatus.REMOVED && !gameOver"
+              (click)="handleTileClick(cell)"
+            >
               @if (cell.status === TileStatus.UNCOVERED) {
                 <img [src]="cell.image" alt="">
               } @else if (cell.status === TileStatus.COVERED) {
