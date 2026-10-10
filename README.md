@@ -1,59 +1,51 @@
 # Memory
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.9.
+## Overview
 
-## Development server
+A classic Memory card-matching game built with **Angular**.
 
-To start a local development server, run:
+The goal is to find pairs of matching images by flipping cards and remembering their positions. The application is entirely frontend-based, with no backend or external services required.
 
-```bash
-ng serve
-```
+---
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## History
 
-## Code scaffolding
+The first version of the game was written several years ago in plain JavaScript, as a single-file project created while learning the language. With its simple rules and straightforward logic, Memory seemed like a good exercise for a beginner.
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+Although the game worked, it was not properly responsive, which was the main reason I never decided to publish it.
 
-```bash
-ng generate component component-name
-```
+I returned to the project recently, several years later, while learning Angular and rewriting my other game projects using this framework. The application was rebuilt from scratch, with particular attention to responsive design and usability across different screen sizes.
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+The original JavaScript implementation is preserved in the `legacy` directory as a curiosity and a reminder of where the project started.
 
-```bash
-ng generate --help
-```
+---
 
-## Building
+## Technologies
 
-To build the project run:
+- Angular
+- TypeScript
+- HTML / CSS
+- Bootstrap Icons
 
-```bash
-ng build
-```
+---
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+## Running the Project Locally
 
 ```bash
-ng test
+npm install
+npm start
 ```
 
-## Running end-to-end tests
+---
 
-For end-to-end (e2e) testing, run:
+## Development
 
-```bash
-ng e2e
-```
+This project was built with some assistance from AI tools, primarily ChatGPT, which served as a discussion partner and guide for Angular development.
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+The overall architecture, design decisions, implementation, code reviews and final solutions were designed, evaluated and refined by the author.
 
-## Additional Resources
+---
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+## To Do List
+
+- Publish the application online.
