@@ -6,10 +6,10 @@
 :{$PORT:3000} {
     encode gzip
 
-    redir /mastermind /mastermind/ 308
+    redir /memory /memory/ 308
 
-    handle_path /mastermind/* {
-        root * /app/dist/mastermind/browser
+    handle_path /memory/* {
+        root * /app/dist/memory/browser
         try_files {path} /index.html
         file_server
     }
