@@ -1,0 +1,16 @@
+
+{
+    auto_https off
+}
+
+:{$PORT:3000} {
+    encode gzip
+
+    redir /mastermind /mastermind/ 308
+
+    handle_path /mastermind/* {
+        root * /app/dist/mastermind/browser
+        try_files {path} /index.html
+        file_server
+    }
+}
