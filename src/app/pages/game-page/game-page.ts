@@ -63,7 +63,7 @@ export class GamePage implements OnInit {
 
     return items.map(item => ({
       id: item,
-      image: `/images/${item}.png`,
+      image: `images/${item}.png`,
       status: TileStatus.COVERED,
     }));
   }
@@ -154,12 +154,12 @@ export class GamePage implements OnInit {
 
     for (let i = 1; i <= imageCount; i++) {
       const image = new Image();
-      image.src = `/images/${i}.png`;
+      image.src = `images/${i}.png`;
       this.imageCache.push(image);
     }
 
     const backImage = new Image();
-    backImage.src = '/images/back.png';
+    backImage.src = 'images/back.png';
     this.imageCache.push(backImage);
   }
 
