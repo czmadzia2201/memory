@@ -13,7 +13,7 @@
   max-width: 1300px;
   min-height: calc(100vh - 30px);
   margin: 0 auto;
-  padding: 18px;
+  padding: 18px 18px 12px;
   box-sizing: border-box;
 }
 
@@ -231,8 +231,6 @@ button:hover {
     );
   }
 }
-
-
 
 .game-footer {
   width: min(calc(100% - 36px), 1264px);
