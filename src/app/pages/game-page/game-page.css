@@ -11,7 +11,7 @@
   grid-template-columns: 250px minmax(0, 1fr);
   gap: 20px;
   max-width: 1300px;
-  min-height: 100vh;
+  min-height: calc(100vh - 30px);
   margin: 0 auto;
   padding: 18px;
   box-sizing: border-box;
@@ -54,14 +54,14 @@
   gap: 4px;
 }
 
-.back-link {
+.page-link {
   color: #666;
   font-size: 14px;
   text-decoration: none;
 }
 
-.back-link:hover,
-.back-link:focus-visible {
+.page-link:hover,
+.page-link:focus-visible {
   text-decoration: underline;
 }
 
@@ -233,3 +233,11 @@ button:hover {
 }
 
 
+
+.game-footer {
+  width: min(calc(100% - 36px), 1264px);
+  margin: 0 auto;
+  padding-bottom: 8px;
+  border-top: 1px solid #ddd;
+  text-align: center;
+}
