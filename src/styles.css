@@ -2,7 +2,7 @@
 
 /* Align the shared cookie banner with the right edge of the game panel. */
 :root {
-  --cookie-banner-right: max(20px, calc((100vw - 1300px) / 2 + 38px));
+  --cookie-banner-right: max(38px, calc((100vw - 1300px) / 2 + 38px));
 }
 
 html,
