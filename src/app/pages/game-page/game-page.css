@@ -123,7 +123,6 @@ button:hover {
 .board-placeholder {
   display: grid;
   place-items: center;
-
   width: min(100%, 620px, calc(100dvh - 110px));
   aspect-ratio: 1;
 
@@ -136,6 +135,7 @@ button:hover {
   font-size: 20px;
   line-height: 1.5;
   text-align: center;
+  min-width: 400px;
 }
 
 .board-container {
@@ -213,7 +213,7 @@ button:hover {
 }
 
 /* Mobile */
-@media (max-width: 850px) {
+@media (max-width: 750px) {
   .game-layout {
     grid-template-columns: 1fr;
     min-width: 360px;
@@ -221,6 +221,10 @@ button:hover {
 
   .side-panel {
     min-height: auto;
+  }
+
+  .board-placeholder {
+    min-width: 0;
   }
 
   .board-container {
