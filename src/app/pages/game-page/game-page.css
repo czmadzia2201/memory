@@ -225,6 +225,7 @@ button:hover {
 
   .board-placeholder {
     min-width: 0;
+    width: min(100%, 620px, calc(100dvh - 110px), max(216px, calc(100vw - 380px)));
   }
 
   .board-container {
