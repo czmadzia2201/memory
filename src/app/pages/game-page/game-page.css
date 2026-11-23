@@ -124,7 +124,7 @@ button:hover {
   display: grid;
   place-items: center;
 
-  width: min(72%, 620px, calc(100dvh - 110px));
+  width: min(100%, 620px, calc(100dvh - 110px));
   aspect-ratio: 1;
 
   background: #fcfcfc;
